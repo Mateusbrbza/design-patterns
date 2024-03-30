@@ -1,0 +1,12 @@
+[
+    {
+      "id": "Pikachu",
+      "attack": 100,
+      "defense": 20
+    },
+    {
+      "id": "Bulbasaur",
+      "attack": 20,
+      "defense": 100
+    }
+  ]

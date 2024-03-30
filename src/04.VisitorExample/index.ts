@@ -1,5 +1,3 @@
-import { RecordHandler, loader } from "./loader";
-
 type Listener<EventType> = (ev: EventType) => void;
 function createObserver<EventType>(): {
     subscribe: (listener: Listener<EventType>) => () => void;

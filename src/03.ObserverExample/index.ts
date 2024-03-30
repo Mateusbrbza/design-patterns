@@ -1,5 +1,3 @@
-import { RecordHandler, loader } from "./loader";
-
 type Listener<EventType> = (ev: EventType) => void;
 function createObserver<EventType>(): {
     subscribe: (listener: Listener<EventType>) => () => void;
@@ -45,8 +43,6 @@ interface Database<T extends BaseRecord> {
 
     onBeforeAdd(listener: Listener<BeforeSetEvent<T>>): () => void;
     onAfterAdd(listener: Listener<AfterSetEvent<T>>): () => void;
-
-    visit(visitor: (item: T) => void): void;
 }
 
 function createDabatase<T extends BaseRecord>() {
@@ -82,11 +78,6 @@ function createDabatase<T extends BaseRecord>() {
         onAfterAdd(listener: Listener<AfterSetEvent<T>>): () => void {
             return this.afterAddListeners.subscribe(listener);
         };
-
-        // Visitor
-        visit(visitor: (item: T) => void): void {
-            Object.values(this.db).forEach(visitor);
-        }
     }
     return InMemoryDB
 }
@@ -113,8 +104,4 @@ PokemonDB.instance.set({
     defense: 99,
 });
 
-// console.log(PokemonDB.instance.get('Bulbasaur'));
-
-PokemonDB.instance.visit((item) => {
-    console.log(item.id);
-});
+console.log(PokemonDB.instance.get('Bulbasaur'));
